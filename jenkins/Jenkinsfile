@@ -19,10 +19,17 @@ pipeline {
                 }
             }
         }
-        stage('Deliver') {
-            steps {
-                sh './jenkins/scripts/deliver.sh'
-            }
+       stage('Deliver') {
+    steps {
+        sh 'ls -la target'  // Ensure the JAR file is present
+        sh 'ls -la jenkins/src'  // Ensure deliver.sh is present
+        sh 'chmod +x jenkins/src/deliver.sh'  // Ensure script is executable
+        sh 'jenkins/src/deliver.sh'
+    }
+}
+    }
+}
+
         }
     }
 }
